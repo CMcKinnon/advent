@@ -1,5 +1,4 @@
-﻿using System;
-namespace Advent02
+﻿namespace Advent02
 {
     public static class Program
     {
