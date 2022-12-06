@@ -12,11 +12,11 @@
                 .OrderByDescending(p => p);
 
             // 68802
-            Console.WriteLine("part 1:" + sorted
+            Console.WriteLine("Part 1: " + sorted
                 .First());
 
             // 205370
-            Console.WriteLine("part 2: " + sorted
+            Console.WriteLine("Part 2: " + sorted
                 .Take(3)
                 .Sum());
         }
