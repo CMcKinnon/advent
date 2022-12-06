@@ -14,9 +14,17 @@
 
             Crane crane = new(ship, steps);
 
-            crane.ProcessSteps();
+            crane.ProcessStepsPart1();
 
-            Console.WriteLine($"Part 1: {crane.GetPart1Result()}");
+            Console.WriteLine($"Part 1: {crane.GetResult()}");
+
+            ship = parser.LoadShip();
+
+            crane = new(ship, steps);
+
+            crane.ProcessStepsPart2();
+
+            Console.WriteLine($"Part 1: {crane.GetResult()}");
         }
     }
 }
