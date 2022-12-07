@@ -10,7 +10,6 @@ namespace Advent07
 
         public DirEntry Parse()
         {
-
             DirEntry cwd = root;
 
             foreach (string line in data)
