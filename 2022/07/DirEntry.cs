@@ -42,10 +42,6 @@ namespace Advent07
         {
             List<DirEntry> matches = new();
             FindSizeAtMost(this, 100000, matches);
-            foreach (DirEntry dir in matches)
-            {
-                Console.WriteLine($"{dir.Name} - {dir.Size}");
-            }
 
             Console.WriteLine($"Part 1: {matches.Sum(d => d.Size)}");
         }
@@ -61,6 +57,35 @@ namespace Advent07
                 if (child.DirEntryType == DirEntryType.Directory)
                 {
                     FindSizeAtMost(child, atMost, matches);
+                }
+            }
+        }
+
+        public void ShowPart2Answer()
+        {
+            long totalSize = Size;
+            long unused = 70000000 - totalSize;
+            const long targetUnused = 30000000L;
+            long diff = targetUnused - unused;
+
+            List<DirEntry> matches = new();
+            FindSizeAtLeast(this, diff, matches);
+
+            DirEntry smallest = matches.OrderBy(d => d.Size).First();
+            Console.WriteLine($"Part 2: {smallest.Size}");
+        }
+
+        private void FindSizeAtLeast(DirEntry dir, long atLeast, List<DirEntry> matches)
+        {
+            if (dir.Size >= atLeast)
+            {
+                matches.Add(dir);
+            }
+            foreach (DirEntry child in dir.Children)
+            {
+                if (child.DirEntryType == DirEntryType.Directory)
+                {
+                    FindSizeAtLeast(child, atLeast, matches);
                 }
             }
         }

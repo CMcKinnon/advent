@@ -10,9 +10,9 @@
 
             DirEntry root = parser.Parse();
 
-            root.Display();
-
             root.ShowPart1Answer();
+
+            root.ShowPart2Answer();
         }
     }
 }
