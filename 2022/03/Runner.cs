@@ -1,10 +1,10 @@
-﻿namespace Advent03
+﻿namespace Day03
 {
-    public static class Program
+    public class Runner : IDay
     {
-        public static void Main()
+        public void Run()
         {
-            string[] sacks = File.ReadAllLines("data.txt");
+            string[] sacks = File.ReadAllLines("datafiles/03.txt");
 
             int sum = 0;
 

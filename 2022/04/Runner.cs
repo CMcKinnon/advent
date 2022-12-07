@@ -1,10 +1,10 @@
-﻿namespace Advent04
+﻿namespace Day04
 {
-    public static class Program
+    public class Runner : IDay
     {
-        private static void Main()
+        public void Run()
         {
-            string[] pairs = File.ReadAllLines("data.txt");
+            string[] pairs = File.ReadAllLines("datafiles/04.txt");
 
             int completeOverlaps = 0, partialOverlaps = 0;
 

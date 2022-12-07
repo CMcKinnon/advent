@@ -1,6 +1,6 @@
-﻿namespace Advent02
+﻿namespace Day02
 {
-    public static class Program
+    public class Runner : IDay
     {
         private static readonly Dictionary<string, int> scores = new()
         {
@@ -28,9 +28,9 @@
             ["CZ"] = "X"
         };
 
-        private static void Main()
+        public void Run()
         {
-            string[] rounds = File.ReadAllLines("data.txt");
+            string[] rounds = File.ReadAllLines("datafiles/02.txt");
 
             int score = 0;
 

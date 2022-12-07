@@ -1,4 +1,4 @@
-namespace Advent05
+namespace Day05
 {
     public class Ship
     {

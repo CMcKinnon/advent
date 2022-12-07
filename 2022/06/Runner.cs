@@ -1,10 +1,10 @@
-﻿namespace Advent06
+﻿namespace Day06
 {
-    public static class Program
+    public class Runner : IDay
     {
-        private static void Main()
+        public void Run()
         {
-            foreach (string line in File.ReadAllLines("data.txt"))
+            foreach (string line in File.ReadAllLines("datafiles/06.txt"))
             {
                 ProcessLine("Part 1: ", line, 4);
                 ProcessLine("Part 2: ", line, 14);

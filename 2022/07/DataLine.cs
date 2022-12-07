@@ -1,4 +1,4 @@
-namespace Advent07
+namespace Day07
 {
     public class DataLine
     {

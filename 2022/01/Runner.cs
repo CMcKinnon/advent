@@ -1,10 +1,10 @@
-﻿namespace Advent01
+﻿namespace Day01
 {
-    public static class Program
+    public class Runner : IDay
     {
-        public static void Main()
+        public void Run()
         {
-            IOrderedEnumerable<int> sorted = File.ReadAllText("data.txt")
+            IOrderedEnumerable<int> sorted = File.ReadAllText("datafiles/01.txt")
                 .Split(new[] { "\n\n" }, StringSplitOptions.None)
                 .Select(g => g.Split('\n', StringSplitOptions.RemoveEmptyEntries)
                 .Select(d => int.Parse(d)))

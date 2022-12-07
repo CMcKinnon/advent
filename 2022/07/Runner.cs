@@ -1,10 +1,10 @@
-﻿namespace Advent07
+﻿namespace Day07
 {
-    public static class Program
+    public class Runner : IDay
     {
-        private static void Main()
+        public void Run()
         {
-            string[] data = File.ReadAllLines("data.txt");
+            string[] data = File.ReadAllLines("datafiles/07.txt");
 
             Parser parser = new(data);
 

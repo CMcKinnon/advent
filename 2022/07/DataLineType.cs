@@ -1,6 +1,6 @@
 using System.Data;
 using System.IO;
-namespace Advent07
+namespace Day07
 {
     public enum DataLineType
     {
