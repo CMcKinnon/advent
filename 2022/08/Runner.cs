@@ -105,6 +105,7 @@ namespace Day08
                 return 0;
             }
 
+            // directions to move away from each tree
             List<(int x, int y)> directions = new()
             {
                 (0,-1),
@@ -112,6 +113,7 @@ namespace Day08
                 (0,1),
                 (-1,0),
             };
+
             List<int> scores = new();
 
             int max = lines[y][x];
@@ -122,7 +124,9 @@ namespace Day08
                 int tempScore = 0;
                 int tx = x + dir.x, ty = y + dir.y;
 
-                while (val < max && tx >= 0 && tx < lines.Length && ty >= 0 && ty < lines[0].Length)
+                // move until we hit and edge or a tree that blocks vision
+                while (val < max && tx >= 0 && tx < lines.Length
+                    && ty >= 0 && ty < lines[0].Length)
                 {
                     val = lines[ty][tx];
                     tempScore++;
@@ -135,6 +139,7 @@ namespace Day08
                 }
             }
 
+            // get the final score for this tree
             if (scores.Count > 0)
             {
                 return scores.Aggregate((acc, x) => acc * x);
