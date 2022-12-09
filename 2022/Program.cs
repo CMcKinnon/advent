@@ -55,7 +55,7 @@ namespace Advent2022
             Stopwatch sw = Stopwatch.StartNew();
             day?.Run();
             sw.Stop();
-            Console.WriteLine($"{Environment.NewLine}Elapsed: {sw.Elapsed}{Environment.NewLine}");
+            Console.WriteLine($"{Environment.NewLine}Elapsed: {sw.Elapsed} ({sw.ElapsedMilliseconds}ms){Environment.NewLine}");
         }
 
         private static string? GetDayNum(this string name) => name?.Replace("Day", "")?.Replace(".Runner", "");
