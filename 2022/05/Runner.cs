@@ -24,7 +24,7 @@
 
             crane.ProcessStepsPart2();
 
-            Console.WriteLine($"Part 1: {crane.GetResult()}");
+            Console.WriteLine($"Part 2: {crane.GetResult()}");
         }
     }
 }

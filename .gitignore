@@ -43,7 +43,7 @@ _ReSharper*/
 *R\#Settings
 *.sln.docstates
 ECWeb2\.userprefs
-*\Bin\
+*\Bin
 bin
 stampinup-search-index
 Deploy
