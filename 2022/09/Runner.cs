@@ -8,7 +8,7 @@ namespace Day09
 
             SolvePart1(moves);
 
-            //SolvePart2(moves);
+            SolvePart2(moves);
         }
 
         private static void SolvePart1(string[] moves)
@@ -25,7 +25,6 @@ namespace Day09
             {
                 (int xMove, int yMove, int count) = ParseMove(move);
 
-                Console.WriteLine(move);
 
                 for (int i = 0; i < count; i++)
                 {
@@ -65,8 +64,6 @@ namespace Day09
                     for (int j = 0; j < 9; j++)
                     {
                         MoveTail(nodes[j], nodes[j + 1], tailVisits);
-
-                        Console.WriteLine($" node {j} => ({nodes[j].X}, {nodes[j].Y})  node {j + 1} => ({nodes[j + 1].X}, {nodes[j + 1].Y})");
                     }
                 }
             }
