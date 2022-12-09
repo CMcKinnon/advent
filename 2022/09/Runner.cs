@@ -6,10 +6,17 @@ namespace Day09
         {
             string[] moves = File.ReadAllLines("datafiles/09.txt");
 
+            SolvePart1(moves);
+
+            //SolvePart2(moves);
+        }
+
+        private static void SolvePart1(string[] moves)
+        {
             HashSet<(int, int)> tailVisits = new();
 
             Node head = new();
-            Node tail = new();
+            Node tail = new() { IsFinalNode = true };
 
             // starting position
             tailVisits.Add((0, 0));
@@ -26,12 +33,45 @@ namespace Day09
                     head.Y += yMove;
 
                     MoveTail(head, tail, tailVisits);
-
-                    Console.WriteLine($" head => ({head.X}, {head.Y})  tail => ({tail.X}, {tail.Y})");
                 }
             }
 
             Console.WriteLine($"Part 1: {tailVisits.Count}");
+        }
+
+        private static void SolvePart2(string[] moves)
+        {
+            HashSet<(int, int)> tailVisits = new();
+
+            List<Node> nodes = new();
+
+            for (int i = 0; i < 10; i++)
+            {
+                nodes.Add(new Node() { IsFinalNode = i == 9 });
+            }
+
+            // starting position
+            tailVisits.Add((0, 0));
+
+            foreach (string move in moves)
+            {
+                (int xMove, int yMove, int count) = ParseMove(move);
+
+                for (int i = 0; i < count; i++)
+                {
+                    nodes[0].X += xMove;
+                    nodes[0].Y += yMove;
+
+                    for (int j = 0; j < 9; j++)
+                    {
+                        MoveTail(nodes[j], nodes[j + 1], tailVisits);
+
+                        Console.WriteLine($" node {j} => ({nodes[j].X}, {nodes[j].Y})  node {j + 1} => ({nodes[j + 1].X}, {nodes[j + 1].Y})");
+                    }
+                }
+            }
+
+            Console.WriteLine($"Part 2: {tailVisits.Count}");
         }
 
         private static void MoveTail(Node head, Node tail, HashSet<(int, int)> tailVisits)
@@ -39,58 +79,16 @@ namespace Day09
             int xDelta = head.X - tail.X;
             int yDelta = head.Y - tail.Y;
 
-            Console.Write($"  xDelta = {xDelta}  yDelta = {yDelta}");
-
-            if (xDelta == 0 && yDelta == 2)
+            if (Math.Abs(xDelta) > 1 || Math.Abs(yDelta) > 1)
             {
-                Console.WriteLine(" up");
-                tail.Y++;
-            }
-            else if (xDelta == 0 && yDelta == -2)
-            {
-                Console.WriteLine(" down");
-                tail.Y--;
-            }
-            else if (yDelta == 0 && xDelta == 2)
-            {
-                Console.WriteLine(" right");
-                tail.X++;
-            }
-            else if (yDelta == 0 && xDelta == -2)
-            {
-                Console.WriteLine(" left");
-                tail.X--;
-            }
-            else if ((xDelta == 1 && yDelta == -2) || (xDelta == 2 && yDelta == -1))
-            {
-                Console.WriteLine(" right/down");
-                tail.X++;
-                tail.Y--;
-            }
-            else if ((xDelta == -2 && yDelta == 1) || (xDelta == -1 && yDelta == 2))
-            {
-                Console.WriteLine(" left/up");
-                tail.X--;
-                tail.Y++;
-            }
-            else if ((xDelta == 1 && yDelta == 2) || (xDelta == 2 && yDelta == 1))
-            {
-                Console.WriteLine(" right/up");
-                tail.X++;
-                tail.Y++;
-            }
-            else if ((xDelta == -2 && yDelta == -1) || (xDelta == -1 && yDelta == -2))
-            {
-                Console.WriteLine(" left/down");
-                tail.X--;
-                tail.Y--;
-            }
-            else
-            {
-                Console.WriteLine(" no move");
+                tail.X += Math.Sign(xDelta);
+                tail.Y += Math.Sign(yDelta);
             }
 
-            tailVisits.Add((tail.X, tail.Y));
+            if (tail.IsFinalNode)
+            {
+                tailVisits.Add((tail.X, tail.Y));
+            }
         }
 
         private static (int, int, int) ParseMove(string move)

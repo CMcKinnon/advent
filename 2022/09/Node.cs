@@ -5,5 +5,7 @@ namespace Day09
         public int X { get; set; }
 
         public int Y { get; set; }
+
+        public bool IsFinalNode { get; set; }
     }
 }
