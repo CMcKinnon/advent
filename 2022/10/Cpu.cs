@@ -8,7 +8,7 @@ namespace Day10
 
         private int cycle = 1;
 
-        private readonly List<CpuState> cpuState = new();
+        private readonly List<CpuState> cpuStates = new();
 
         public Cpu(List<Instruction> instructions) => this.instructions = instructions;
 
@@ -18,7 +18,7 @@ namespace Day10
             {
                 for (int i = 0; i < instruction.Cycles; i++)
                 {
-                    cpuState.Add(new CpuState(cycle, x));
+                    cpuStates.Add(new CpuState(cycle, x));
                     cycle++;
                 }
                 if (instruction.OpCode == OpCode.AddX)
@@ -34,12 +34,37 @@ namespace Day10
             int sum = 0;
             while (cycle <= 220)
             {
-                int signal = cpuState[cycle - 1].Signal;
+                int signal = cpuStates[cycle - 1].Signal;
                 sum += signal;
                 cycle += 40;
             }
 
             Console.WriteLine($"Part 1: {sum}");
+        }
+
+        public void DisplayPart2()
+        {
+            Console.WriteLine($"{Environment.NewLine}Part 2:{Environment.NewLine}");
+
+            foreach (CpuState cpuState in cpuStates)
+            {
+                int col = cpuState.Col - 1;
+                int sprite = cpuState.SpritePos;
+
+                if (sprite - 1 == col || sprite == col || sprite + 1 == col)
+                {
+                    Console.Write("#");
+                }
+                else
+                {
+                    Console.Write(".");
+                }
+
+                if (col == 39)
+                {
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }

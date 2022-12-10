@@ -13,6 +13,8 @@ namespace Day10
             cpu.RunProgram();
 
             cpu.DisplayPart1();
+
+            cpu.DisplayPart2();
         }
 
         private static List<Instruction> Parse(string[] lines)

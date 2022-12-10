@@ -25,7 +25,6 @@ namespace Day09
             {
                 (int xMove, int yMove, int count) = ParseMove(move);
 
-
                 for (int i = 0; i < count; i++)
                 {
                     head.X += xMove;
