@@ -4,7 +4,13 @@ namespace Day11
     {
         private readonly List<Monkey> monkeys;
 
-        public Game(List<Monkey> monkeys) => this.monkeys = monkeys;
+        private readonly ulong modulo;
+
+        public Game(List<Monkey> monkeys)
+        {
+            this.monkeys = monkeys;
+            modulo = monkeys.Select(x => x.TestDivisor).Aggregate((x, y) => x * y);
+        }
 
         public void SolvePart1()
         {
@@ -12,7 +18,7 @@ namespace Day11
             {
                 foreach (Monkey monkey in monkeys)
                 {
-                    ProcessMonkey(monkey);
+                    ProcessMonkey(monkey, true);
                 }
             }
 
@@ -20,13 +26,30 @@ namespace Day11
             Console.WriteLine($"Part 1: {activeMonkeys.First().InspectionCount * activeMonkeys.Last().InspectionCount}");
         }
 
-        private void ProcessMonkey(Monkey monkey)
+        public void SolvePart2()
+        {
+            for (int i = 0; i < 10000; i++)
+            {
+                foreach (Monkey monkey in monkeys)
+                {
+                    ProcessMonkey(monkey, false);
+                }
+            }
+
+            IEnumerable<Monkey> activeMonkeys = monkeys.OrderByDescending(m => m.InspectionCount).Take(2);
+            Console.WriteLine($"Part 2: {activeMonkeys.First().InspectionCount * activeMonkeys.Last().InspectionCount}");
+        }
+
+        private void ProcessMonkey(Monkey monkey, bool reduceWorry)
         {
             while (monkey.Items.Count > 0)
             {
-                int item = monkey.Items.Dequeue();
+                ulong item = monkey.Items.Dequeue();
                 item = GetNewValue(monkey.Operation, item);
-                item /= 3;
+                if (reduceWorry)
+                {
+                    item /= 3;
+                }
                 if (item % monkey.TestDivisor == 0)
                 {
                     monkeys[monkey.TrueMonkey].Items.Enqueue(item);
@@ -39,9 +62,17 @@ namespace Day11
             }
         }
 
-        private static int GetNewValue(Operation operation, int item)
-            => operation.Type == OperationType.Add
-                ? item + operation.Value
-                : item * (operation.IsOldNumber ? item : operation.Value);
+        private ulong GetNewValue(Operation operation, ulong item)
+        {
+            if (operation.Type == OperationType.Add)
+            {
+                return item + operation.Value;
+            }
+            else
+            {
+                ulong multiplier = operation.IsOldNumber ? item : operation.Value;
+                return item * multiplier % modulo;
+            }
+        }
     }
 }

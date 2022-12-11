@@ -6,9 +6,9 @@ namespace Day11
 
         public bool IsOldNumber { get; set; }
 
-        public int Value { get; set; }
+        public ulong Value { get; set; }
 
-        public Operation(OperationType ot, bool isOldNumber, int value)
+        public Operation(OperationType ot, bool isOldNumber, ulong value)
         {
             Type = ot;
             IsOldNumber = isOldNumber;

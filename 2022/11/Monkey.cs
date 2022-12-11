@@ -2,22 +2,23 @@ namespace Day11
 {
     public class Monkey
     {
-        public Queue<int> Items { get; set; }
+        public Queue<ulong> Items { get; set; }
+
         public Operation Operation { get; set; }
 
-        public int TestDivisor { get; set; }
+        public ulong TestDivisor { get; set; }
 
         public int TrueMonkey { get; set; }
 
         public int FalseMonkey { get; set; }
 
-        public int InspectionCount { get; set; }
+        public long InspectionCount { get; set; }
 
         public Monkey(List<string> input)
         {
             Items = new(input[1].Replace("  Starting items: ", "")
                 .Split(',')
-                .Select(d => int.Parse(d))
+                .Select(d => ulong.Parse(d))
                 .ToList());
 
             string[] operations = input[2].Replace("  Operation: new = old ", "").Split(' ');
@@ -35,14 +36,14 @@ namespace Day11
                 throw new InvalidOperationException($"Invalid operation type {operations[0]}");
             }
             bool isOld = operations[1] == "old";
-            int value = 0;
+            ulong value = 0;
             if (!isOld)
             {
-                value = int.Parse(operations[1]);
+                value = ulong.Parse(operations[1]);
             }
             Operation = new(ot, isOld, value);
 
-            TestDivisor = int.Parse(input[3].Replace("  Test: divisible by ", ""));
+            TestDivisor = ulong.Parse(input[3].Replace("  Test: divisible by ", ""));
 
             TrueMonkey = int.Parse(input[4].Replace("   If true: throw to monkey ", ""));
 

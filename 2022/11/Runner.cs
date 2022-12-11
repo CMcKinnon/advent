@@ -10,6 +10,12 @@ namespace Day11
             Game game = new(monkeys);
 
             game.SolvePart1();
+
+            // reset items and counts
+            monkeys = ParseMonkeys(input);
+            game = new(monkeys);
+
+            game.SolvePart2();
         }
 
         private static List<Monkey> ParseMonkeys(List<string> input)
