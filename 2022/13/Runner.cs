@@ -10,7 +10,7 @@ namespace Day13
 
             var input = text.Split($"{Environment.NewLine}{Environment.NewLine}")
                 .Select(p => p.Split(Environment.NewLine))
-                .Select(p => (Left: JsonDocument.Parse(p[0]).RootElement, Right: JsonDocument.Parse(p[1]).RootElement));
+                .Select(p => (first: JsonDocument.Parse(p[0]).RootElement, second: JsonDocument.Parse(p[1]).RootElement));
         }
     }
 }
